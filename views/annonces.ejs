@@ -1,1 +1,10 @@
 <h1 class="mt-4">Mes annonces</h1>
+<a href="javascript:history.go(-1);" class="btn btn-secondary">retour</a>
+<br></br>
+<% for (annonces of annonces) { %>
+    <p>Categorie : <%= annonces.Categorie %></p>
+    <a href="/users/annonces/<%= annonces.Categorie %>"><p><%= annonces.Categorie %></p></a>
+    <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
+    <p>About : <%= annonces.about %></p>
+    <hr>
+  <% } %>

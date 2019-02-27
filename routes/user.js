@@ -121,12 +121,12 @@ router.get('/logout', (req, res) => {
             if(err){
                 res.send(err);
             }else{
-                console.log(result);
+                res.render('annonces', {annonces:result});
             }   
          });
 
     });
-    res.render('annonces');
+    
   });
 
 
@@ -135,10 +135,28 @@ router.get('/logout', (req, res) => {
       MongoClient.connect("mongodb://localhost/tutoriel", function(error, db) {
         if (error) return funcCallback(error);
             // attention req.session.email c'est l'id de la personne qui fait l'annonce 
-            db.collection("annonces").insert({about:req.body.About, id_user:req.session.email,Categorie:req.body.Categorie, SousCategorie : req.body.SousCategorie});
+            db.collection("annonces").insert({about:req.body.About, id_user:req.session.email,Categorie:req.body.Categorie, SousCategorie : req.body.sousCategorie});
         });  
-        res.send("bonne nuit");
+        res.redirect("javascript:history.go(-1);");
   });
+
+  router.get('/annonces/:id', function(req,res,next){
+    MongoClient.connect("mongodb://localhost/tutoriel", function(error, db) {
+    if (error) return funcCallback(error);
+
+    console.log("Connecté à la base de données 'tutoriel'");
+    console.log(req.params.id);
+        db.collection("annonces").findOne({Categorie:req.params.id },function(err,result){
+            if(err){
+                res.send(err);
+            }
+            else{
+                console.log(result);
+                res.render("annonce",{annonce:result});
+            }
+        });
+    });  
+}); 
 
 
 
