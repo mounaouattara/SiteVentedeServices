@@ -1,0 +1,45 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Ajout Annonnce
+        </h1>
+        <form action="/users/ajout" method="POST">
+          <div class="form-group">
+            <label for="Categorie">Categorie</label>
+            <input
+              type="Categorie"
+              id="Categorie"
+              name="name"
+              class="form-control"
+              placeholder="Enter Categorie"
+            />
+          </div>
+          <div class="form-group">
+            <label for="sous-Categorie">sous-Categorie</label>
+            <input
+              type="sous-Categorie"
+              id="sous-Categorie"
+              name="sous-Categorie"
+              class="form-control"
+              placeholder="Enter sous-Categorie"
+            />
+          </div>
+          <div class="form-group">
+            <label for="About">About</label>
+            <input
+              type="About"
+              id="About"
+              name="About"
+              class="form-control"
+              placeholder="Create About"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Ajout
+          </button>
+        </form>
+        <p class="lead mt-4">retour dashboard <a href="javascript:history.go(-1);">Précédent</a>
+      </div>
+    </div>
+  </div>

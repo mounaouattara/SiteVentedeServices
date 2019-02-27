@@ -1,0 +1,40 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%=user.name %></p> 
+<form action="/users/ajout" method="POST">
+    <div class="form-group">
+      <label for="Categorie">Categorie</label>
+      <input
+        type="Categorie"
+        id="Categorie"
+        name="Categorie"
+        class="form-control"
+        placeholder="Enter Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="sousCategorie">sousCategorie</label>
+      <input
+        type="sousCategorie"
+        id="sousCategorie"
+        name="sousCategorie"
+        class="form-control"
+        placeholder="Enter sous-Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="About">About</label>
+      <input
+        type="About"
+        id="About"
+        name="About"
+        class="form-control"
+        placeholder="Create About"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      Ajout
+    </button>
+  </form>
+  <br></br>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/users/annonces" class="btn btn-primary">Mes annonnces</a>
