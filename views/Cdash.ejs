@@ -1,0 +1,19 @@
+<h1 class="mt-4">Dashboard Client</h1>
+<p class="lead mb-3">Welcome <%=user.name %></p> 
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/users/saves" class="btn btn-primary">Mes saves</a>
+<a href="/users/annonces" class="btn btn-warning">Mes rendez-vous</a>
+<a href="/users/annonces" class="btn btn-info">Mes messages</a>
+<br></br>
+<input class=" mr-sm-2" type="text" placeholder="Categorie">
+<input class=" mr-sm-2" type="text" placeholder="Sous-Categorie">
+<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+<% for (annonces of annonces) { %>
+    <p>Categorie : <%= annonces.Categorie %></p>
+    <a href="/users/annonces/<%= annonces._id %>"><p><%= annonces.Categorie %></p></a>
+    <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
+    <p>About : <%= annonces.about %></p>
+    <a class="btn btn-danger" href="" role="button">Supprimer</a>
+    <a class="btn btn-primary" href="/users/save/<%=annonces._id %>" role="button">save</a>
+    <hr>
+  <% } %>
