@@ -11,19 +11,18 @@ var ObjectId = require('mongodb').ObjectID;
 var $ = require("jquery");
 const delay = require('delay');
 
-var favoris = []; 
+var http = require('http');
+var fs = require('fs');
 
+var favoris = []; 
 
 
 
 router.get('/loggin', (req,res) => res.render('loggin'));
 router.get('/register', (req,res) => res.render('register'));
-
-
 router.get('/LClient', (req,res) => res.render('LClient'));
-
 router.get('/RClient', (req,res) => res.render('RClient'));
-
+router.get('/calendar', (req,res) => res.render('calendar'));
 
 
 // register handle Presta
@@ -308,42 +307,103 @@ router.get('/saves', function(req,res,next){
         if (error) return funcCallback(error);
     
         console.log("Connecté à la base de données 'tutoriel'");
-
-        db.collection("Client").findOne({"_id":ObjectId(req.session.email)},function(err,result){
+        var count = 0;
+        var fav = [];
+        db.collection("Client").findOne({_id:ObjectId(req.session.email)}, function(err,docs){
             if(err){
                 res.send(err);
             }
             else{
-                console.log(req.session.email);
-                idannonces = result.favoris;
-                console.log(idannonces);
-                var promise1 = new Promise(function(resolve,reject){
-                    for(var i = 0 ; i<idannonces.length ; i++){
-                        db.collection("annonces").findOne({"_id":ObjectId(idannonces[i])},function(err,result2){
+                console.log(docs.favoris.length);
+                const start = async () =>{
+                    await asyncForEach(docs.favoris, async(ida) =>{
+                        console.log(ida);
+                        db.collection("annonces").findOne({"_id":ObjectId(ida)}, function(err,res1){
                             if(err){
                                 res.send(err);
                             }
-                            else{
-                                favoris.push(result2);
+                            else{ 
+                                count++;
+                                console.log(count);
+                                console.log(res1);
+                                fav.push(res1); 
+                                if(count>=docs.favoris.length){
+                                res.render("annonces",{annonces:fav});
+                                console.log(fav);
+                                    /*res.render("annonces",{annonces:fav});
+                                    console.log(fav);*/
+                                }  
                             }
-                        });
-                    }
-                    resolve(favoris);
-                });
-                promise1.then(function(value){
-                    console.log(value);
-                })
-                console.log(promise1);
-                
-                
+                        });                       
+                    });
+                }
+                start();
+            }
+        });
+    });
+});
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index <= array.length; index++) {
+        if(index < array.length){
+            await callback(array[index], index, array);
+        }
+    }
+  }
+  router.post('/:id/update', function(req,res,next){
+   console.log('test');
+   MongoClient.connect("mongodb://localhost/tutoriel", function(error, db){
+        if (error) return funcCallback(error);
+        console.log("test edit " + req.params.id);
+        var myquery = { "_id":ObjectId(req.params.id)};
+        var newvalues = { $set: {about:req.body.About, Categorie:req.body.About, SousCategorie:req.body.sousCategorie}};
+        db.collection("annonces").updateOne(myquery,newvalues,function(err,resultat){
+            if(err)throw err;
+            console.log("update reussis");
+            res.redirect("javascript:history.go(-1);");
+            
+        });
+
+    });
+
+});
+
+router.get('/annonces/:id/delete', function(req,res,next){
+    MongoClient.connect("mongodb://localhost/tutoriel", function(error, db){
+        if (error) return funcCallback(error);
+
+        console.log("Connecté à la base de données 'tutoriel'");
+        console.log(req.params.id);   
+        
+        db.collection("annonces").remove({"_id":ObjectId(req.params.id)}, function(err,result){
+            if(err){
+                res.send(err);
+            }else{
+                res.redirect("javascript:history.go(-1);");
+            }
+        })
+
+    });
+}); 
+
+
+router.post('/:id/comments', function(req,res,next){
+    console.log(req.body.Commentaire);
+    console.log(req.params.id);
+    MongoClient.connect("mongodb://localhost/tutoriel", function(error, db){
+        if (error) return funcCallback(error);        
+        db.collection("annonces").update({"_id":ObjectId(req.params.id)},{$push : {comments : req.body.Commentaire}} , function(err,result){
+            if(err){
+                res.send(err);
+            }
+            else{
+                res.redirect("javascript:history.go(-1);");
             }
         });
 
+    });
 
-        });
-
-
-});
+}); 
 
 
 

@@ -4,16 +4,37 @@
 <a href="/users/saves" class="btn btn-primary">Mes saves</a>
 <a href="/users/annonces" class="btn btn-warning">Mes rendez-vous</a>
 <a href="/users/annonces" class="btn btn-info">Mes messages</a>
+<style type="text/css">
+  #commentaire{
+    margin-top: 20px;
+  }
+  #commentaire input{
+    width: 30%;
+  }
+</style>
 <br></br>
 <input class=" mr-sm-2" type="text" placeholder="Categorie">
 <input class=" mr-sm-2" type="text" placeholder="Sous-Categorie">
 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
 <% for (annonces of annonces) { %>
-    <p>Categorie : <%= annonces.Categorie %></p>
-    <a href="/users/annonces/<%= annonces._id %>"><p><%= annonces.Categorie %></p></a>
-    <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
+    <a href="/users/annonces/<%= annonces._id %>"><h1><%= annonces.Categorie %></h1></a>
+    <h2>Sous - Categorie : <%= annonces.SousCategorie %></h2>
     <p>About : <%= annonces.about %></p>
-    <a class="btn btn-danger" href="" role="button">Supprimer</a>
-    <a class="btn btn-primary" href="/users/save/<%=annonces._id %>" role="button">save</a>
+    <a class="btn btn-primary" href="/users/save/<%=annonces._id %>" role="button"><i class="far fa-thumbs-up"></i></a>
+    <div id="commentaire">
+        <form action="/users/<%=annonces._id%>/comments" method="POST">
+            <input  type="Commentaire"
+            id="Commentaire"
+            name="Commentaire"
+            placeholder="commentaire">
+            <button type="submit" class="btn btn-info"><i class="far fa-comments"></i></button>
+        </form>
+        
+    </div id="comments">
+      <% for(n in annonces.comments) {%>
+        <p>
+          <%= annonces.comments[n] %>
+        </p>
+      <% } %>
     <hr>
   <% } %>

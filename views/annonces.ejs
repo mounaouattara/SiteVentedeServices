@@ -3,10 +3,11 @@
 <br></br>
 <hr>
 <% for (annonces of annonces) { %>
-    <p>Categorie : <%= annonces.Categorie %></p>
+    <h3>Categorie : <%= annonces.Categorie %></p>
     <a href="/users/annonces/<%= annonces._id %>"><p><%= annonces.Categorie %></p></a>
     <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
     <p>About : <%= annonces.about %></p>
-    <a class="btn btn-danger" href="#" role="button">Supprimer</a>
+    <a class="btn btn-danger" href="/users/annonces/<%= annonces._id %>/delete" role="button">Supprimer</a>
+    
     <hr>
   <% } %>

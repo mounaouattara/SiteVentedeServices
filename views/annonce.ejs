@@ -3,3 +3,38 @@
 <p>Categorie : <%= annonce.Categorie %></p>
 <p>Sous - Categorie : <%= annonce.SousCategorie %></p>
 <p>About : <%= annonce.about %></p>
+<form action="/users/<%= annonce._id %>/update" method="POST">
+    <div class="form-group">
+      <label for="Categorie">Categorie</label>
+      <input
+        type="Categorie"
+        id="Categorie"
+        name="Categorie"
+        class="form-control"
+        placeholder="Enter Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="sousCategorie">sousCategorie</label>
+      <input
+        type="sousCategorie"
+        id="sousCategorie"
+        name="sousCategorie"
+        class="form-control"
+        placeholder="Enter sous-Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="About">About</label>
+      <input
+        type="About"
+        id="About"
+        name="About"
+        class="form-control"
+        placeholder="Create About"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      update
+    </button>
+  </form>

@@ -5,11 +5,13 @@ MongoClient = require('mongodb').MongoClient;
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+var path = require('path');
+var bodyParser = require("body-parser");
+var $ = require("jquery");
 
 const app = express(); 
 
 // Connected BD
-
 
 // EJS   
 
@@ -47,6 +49,7 @@ app.use((req,res,next)=>{
 // ROUTES 
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/user'));
+
 
 
 const PORT = process.env.PORT || 5000;
