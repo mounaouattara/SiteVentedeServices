@@ -1,0 +1,13 @@
+<h1 class="mt-4">Mes annonces</h1>
+<a href="javascript:history.go(-1);" class="btn btn-secondary">retour</a>
+<br></br>
+<hr>
+<% for (annonces of annonces) { %>
+    <h3>Categorie : <%= annonces.Categorie %></p>
+    <a href="/users/annonces/<%= annonces._id %>"><p><%= annonces.Categorie %></p></a>
+    <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
+    <p>About : <%= annonces.about %></p>
+    <a class="btn btn-danger" href="/users/saves/<%= annonces._id %>/delete" role="button">Supprimer</a>
+    
+    <hr>
+  <% } %>

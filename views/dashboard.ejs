@@ -2,7 +2,7 @@
 <p class="lead mb-3">Welcome <%=user.name %></p> 
 <form action="/users/ajout" method="POST">
     <div class="form-group">
-      <label for="Categorie">Categorie</label>
+      <label for="Categorie">Catégorie:</label>
       <input
         type="Categorie"
         id="Categorie"
@@ -12,7 +12,7 @@
       />
     </div>
     <div class="form-group">
-      <label for="sousCategorie">sousCategorie</label>
+      <label for="sousCategorie">Sous-Catégorie:</label>
       <input
         type="sousCategorie"
         id="sousCategorie"
@@ -22,7 +22,7 @@
       />
     </div>
     <div class="form-group">
-      <label for="About">About</label>
+      <label for="About">About:</label>
       <input
         type="About"
         id="About"
@@ -31,6 +31,16 @@
         placeholder="Create About"
       />
     </div>
+     <div class="form-group">
+            <label for="About">Entrez l'Url d'une image représentative:</label>
+            <input
+              type="img"
+              id="Image"
+              name="Image"
+              class="form-control"
+              placeholder="Veuillez insérer une url."
+            />
+          </div>
     <button type="submit" class="btn btn-primary btn-block">
       Ajout
     </button>

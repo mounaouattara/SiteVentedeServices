@@ -1,0 +1,48 @@
+<h1 class="mt-4">Dashboard Client</h1>
+<p class="lead mb-3">Welcome</p> 
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/users/saves" class="btn btn-primary">Mes saves</a>
+<a href="/users/annonces" class="btn btn-warning">Mes rendez-vous</a>
+<a href="/users/annonces" class="btn btn-info">Mes messages</a>
+<a href="javascript:history.go(-1);" class="btn btn-secondary">retour</a>
+<style type="text/css">
+  #commentaire{
+    margin-top: 20px;
+  }
+  #commentaire input{
+    width: 30%;
+  }
+</style>
+<br></br>
+<form action="/users/search" method="POST">
+    <input
+                type="Categorie"
+                id="Categorie"
+                name="Categorie"
+                class="form-control"
+                placeholder="Categorie"
+                />
+
+    <input
+                type="sous-Categorie"
+                id="sous-Categorie"
+                name="sousCategorie"
+                class="form-control"
+                placeholder="sous-Categorie"
+                />
+    <button class="btn btn-secondary my-2 my-sm-0"  type="submit">
+        Search
+    </button>
+</form>
+<h1 class="mt-4">Résultats:</h1>
+<br></br>
+
+<% for (annonces of annonces) { %>
+    <h3>Categorie : <%= annonces.Categorie %></p>
+    <a href="/users/annonces/<%= annonces._id %>"><p><%= annonces.Categorie %></p></a>
+    <p>Sous - Categorie : <%= annonces.SousCategorie %></p>
+    <p>About : <%= annonces.about %></p>
+    <a class="btn btn-danger" href="/users/annonces/<%= annonces._id %>/delete" role="button">Supprimer</a>
+    
+    <hr>
+  <% } %>

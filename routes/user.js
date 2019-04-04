@@ -13,6 +13,8 @@ const delay = require('delay');
 
 var http = require('http');
 var fs = require('fs');
+var cloudinary = require('cloudinary');
+
 
 var favoris = []; 
 
@@ -23,6 +25,7 @@ router.get('/register', (req,res) => res.render('register'));
 router.get('/LClient', (req,res) => res.render('LClient'));
 router.get('/RClient', (req,res) => res.render('RClient'));
 router.get('/calendar', (req,res) => res.render('calendar'));
+router.get('/Cannonce', (req,res) => res.render('Cannonce'));
 
 
 // register handle Presta
@@ -262,7 +265,7 @@ router.get('/logout', (req, res) => {
       MongoClient.connect("mongodb://localhost/tutoriel", function(error, db) {
         if (error) return funcCallback(error);
             // attention req.session.email c'est l'id de la personne qui fait l'annonce 
-            db.collection("annonces").insert({about:req.body.About, id_user:req.session.email,Categorie:req.body.Categorie, SousCategorie : req.body.sousCategorie});
+            db.collection("annonces").insert({about:req.body.About, id_user:req.session.email,Categorie:req.body.Categorie, SousCategorie : req.body.sousCategorie, Image : req.body.Image});
         });  
         res.redirect("javascript:history.go(-1);");
   });
@@ -356,7 +359,7 @@ async function asyncForEach(array, callback) {
         if (error) return funcCallback(error);
         console.log("test edit " + req.params.id);
         var myquery = { "_id":ObjectId(req.params.id)};
-        var newvalues = { $set: {about:req.body.About, Categorie:req.body.About, SousCategorie:req.body.sousCategorie}};
+        var newvalues = { $set: {about:req.body.About, Categorie:req.body.About, SousCategorie:req.body.sousCategorie, Image:req.body.Image}};
         db.collection("annonces").updateOne(myquery,newvalues,function(err,resultat){
             if(err)throw err;
             console.log("update reussis");
@@ -404,6 +407,10 @@ router.post('/:id/comments', function(req,res,next){
     });
 
 }); 
+
+
+
+
 
 
 

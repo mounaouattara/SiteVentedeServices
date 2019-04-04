@@ -1,0 +1,57 @@
+<h1 class="mt-4">Mes rendez-vous</h1>
+<a href="javascript:history.go(-1);" class="btn btn-secondary">retour</a>
+<br></br>
+<hr>
+    <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Ajouter un rendez-vous</h1>
+    <% include ./partials/message %>
+    <form action="/users/ajoutrdv" method="POST">
+        <div class="form-group">
+        <label for="rdv">Mois:</label>
+        <input
+          type="int"
+          id="mois"
+          name="mois"
+          class="form-control"
+          placeholder="mois"
+        />
+        </div>
+        <div class="form-group">
+        <label for="Jour">Jour:</label>
+        <input
+          type="int"
+          id="jour"
+          name="jour"
+          class="form-control"
+          placeholder="jour"
+        />
+        </div>
+        <div class="form-group">
+        <label for="Heure">Heure:</label>
+        <input
+            type="int"
+            id="heure"
+            name="heure"
+            class="form-control"
+            placeholder="heure"
+        />
+        </div>
+        <div class="form-group">
+            <label for="Description">Description:</label>
+            <input
+                type="string"
+                id="desc"
+                name="desc"
+                class="form-control"
+                placeholder="description"
+            />
+            </div>
+        <button type="submit" class="btn btn-primary btn-block">créer</button>
+    </form>
+    <hr>
+    <% for (rdv of rdv.rdv) { %>
+        <h3>Description : <%= rdv.desc %></p>
+        <p>Date : <%= rdv.jour %> - <%= rdv.mois %></p>
+        <p>à    : <%= rdv.heure %> h</p>
+        <a class="btn btn-danger" href="/users/calendar/<%= rdv._id %>/delete" role="button">Supprimer</a>
+        <hr>
+      <% } %>

@@ -1,40 +1,29 @@
-<h1 class="mt-4">Mon annonces</h1>
+<h1 class="mt-4"> L'annonce <%= annonce.about %></h1>
 <a href="javascript:history.go(-1);" class="btn btn-secondary">retour</a>
 <p>Categorie : <%= annonce.Categorie %></p>
 <p>Sous - Categorie : <%= annonce.SousCategorie %></p>
 <p>About : <%= annonce.about %></p>
-<form action="/users/<%= annonce._id %>/update" method="POST">
-    <div class="form-group">
-      <label for="Categorie">Categorie</label>
-      <input
-        type="Categorie"
-        id="Categorie"
-        name="Categorie"
-        class="form-control"
-        placeholder="Enter Categorie"
-      />
-    </div>
-    <div class="form-group">
-      <label for="sousCategorie">sousCategorie</label>
-      <input
-        type="sousCategorie"
-        id="sousCategorie"
-        name="sousCategorie"
-        class="form-control"
-        placeholder="Enter sous-Categorie"
-      />
-    </div>
-    <div class="form-group">
-      <label for="About">About</label>
-      <input
-        type="About"
-        id="About"
-        name="About"
-        class="form-control"
-        placeholder="Create About"
-      />
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">
-      update
-    </button>
-  </form>
+
+<div id="commentaire" class="form-group" >
+
+<div id="Image">Image: <img src="<%= annonce.Image %>" height="400" width="400" /> </div>
+
+
+</div id="comments">
+      <% for(n in annonce.comments) {%>
+        <p>
+          <%= annonce.comments[n] %>
+        </p>
+      <% } %>
+
+<h3> COMMENTAIRE</h3>
+        <form action="/users/<%=annonce._id%>/comments" method="POST">
+        <label for="Commentaire">Donne nous ton avis :)</label>
+            <textarea class="form-control" type="Commentaire"
+            id="Commentaire"
+            name="Commentaire"
+            placeholder="commentaire" rows="4"></textarea>
+            <button type="submit" class="btn btn-success"><i class="far fa-comments"></i></button>
+        </form>
+        
+    

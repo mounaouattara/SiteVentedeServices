@@ -10,4 +10,82 @@
     <a class="btn btn-danger" href="/users/annonces/<%= annonces._id %>/delete" role="button">Supprimer</a>
     
     <hr>
+
+
+    <a class="btn btn-warning"><span class="bouton" id="bouton_texte" onclick="javascript:afficher_cacher('texte');">Acces Modification</span></a>
+
+
+    
+    <div id="texte" class="texte">
+
+
+
+    <h1 class="mt-4"> Modification de l'annonces <%= annonces._id.about %></h1>
+
+
+
+<form action="/users/<%= annonces._id %>/update" method="POST">
+    <div class="form-group">
+      <label for="Categorie">Categorie</label>
+      <input
+        type="Categorie"
+        id="Categorie"
+        name="Categorie"
+        class="form-control"
+        placeholder="Enter Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="sousCategorie">sousCategorie</label>
+      <input
+        type="sousCategorie"
+        id="sousCategorie"
+        name="sousCategorie"
+        class="form-control"
+        placeholder="Enter sous-Categorie"
+      />
+    </div>
+    <div class="form-group">
+      <label for="About">About</label>
+      <input
+        type="About"
+        id="About"
+        name="About"
+        class="form-control"
+        placeholder="Create About"
+      />
+    </div>
+    <div class="form-group">
+            <label for="About">Entrez l'Url d'une image représentative:</label>
+            <input
+              type="img"
+              id="Image"
+              name="Image"
+              class="form-control"
+              placeholder="Veuillez insérer une url."
+            />
+          </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      update
+    </button>
+  </form>
+
+    </div>
+    <script type="text/javascript">
+		function afficher_cacher(id)
+		{
+		if(document.getElementById(id).style.visibility=="hidden")
+		{
+		document.getElementById(id).style.visibility="visible";
+		document.getElementById('bouton_'+id).innerHTML='Cacher l'acces modification';
+		}
+		else
+		{
+		document.getElementById(id).style.visibility="hidden";
+		document.getElementById('bouton_'+id).innerHTML='Acces Modification';
+		}
+		return true;
+		}
+    </script>
   <% } %>
+
